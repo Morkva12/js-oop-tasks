@@ -3,7 +3,18 @@
  * Если координаты не переданы - 0,0; Аналогично если только 1 координата.
  * Со звездочкой: реализовать метод, который возвращает расстояние от точки до центра координат (0, 0)
  */
-class Point {}
+class Point {
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // Метод для расчета расстояния от точки до центра координат
+    distanceToCenter() {
+        return Math.sqrt(this.x ** 2 + this.y ** 2);
+    }
+}
+
 
 /**
  * Напишите класс геометрической точки в трехмерном пространстве (x, y, z),
@@ -11,8 +22,17 @@ class Point {}
  * Реализовать статический метод, который возвращает расстояние между Point3D.
  */
 class Point3D extends Point {
-    static vectorLength(a, b) {}
+    constructor(x = 0, y = 0, z = 0) {
+        super(x, y);
+        this.z = z;
+    }
+
+    // Статический метод для расчета расстояния между двумя точками Point3D
+    static vectorLength(a, b) {
+        return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
+    }
 }
+
 
 /**
  * Напишите класс "очередь", в котором можно добавить элемент в конец и получить из начала.
@@ -20,8 +40,26 @@ class Point3D extends Point {
  * Со звездочкой: написать тесты методы класса (oop.spec.js)
  */
 class Queue {
+    constructor(initialArray = []) {
+        this.queue = Array.isArray(initialArray) ? initialArray : [];
+    }
 
+    // Метод для добавления элемента в конец очереди
+    enqueue(item) {
+        this.queue.push(item);
+    }
+
+    // Метод для получения элемента из начала очереди
+    dequeue() {
+        return this.queue.shift();
+    }
+
+    // Метод для проверки, пуста ли очередь
+    isEmpty() {
+        return this.queue.length === 0;
+    }
 }
+
 
 module.exports = {
     Point,
