@@ -5,26 +5,75 @@
 
 // Напишите функцию, которая принимает ФИО пользователя и возвращает
 // строку формата Имя Фамилия
-function fioToName(fio) {}
+function fioToName(fio) {
+    // Разделяем строку на части и присваиваем первые два элемента переменным
+    const [lastName, firstName] = fio.split(' ');
+    // Возвращаем строку в формате "Имя Фамилия"
+    return `${firstName} ${lastName}`;
+}
+
 
 // преобразуйте массив чисел так, чтобы в нем остались только
 // уникальные элементы
 // присмотритесь к коллекции "Set"
-function filterUnique(array) {}
+function filterUnique(array) {
+    // Создаем новый Set из массива, что автоматически удаляет дубликаты, и преобразуем его обратно в массив
+    return [...new Set(array)];
+}
 
 // Задача: разница зарплат
 // в функцию приходит массив из n зарплат сотрудников фирмы
 // ваша задача определить, во сколько раз зарплата самого высокооплачиваемого
 // сотрудника превышает зарплату самого низкооплачиваемого
 // присмотритесь к методу .reduce
-function calculateSalaryDifference(array) {}
+function calculateSalaryDifference(array) {
+    // Проверяем, не пустой ли массив
+    if (array.length === 0) return 0;
+
+    // Ищем максимальное значение
+    const max = array.reduce((acc, val) => Math.max(acc, val));
+    // Ищем минимальное значение
+    const min = array.reduce((acc, val) => Math.min(acc, val));
+
+    // Возвращаем отношение максимальной зарплаты к минимальной
+    return max / min;
+}
+
 
 // Реализуйте класс "словарь слов" (как толковый словарь)
 // класс должен быть безопасным и работать только со словами
 // присмотритесь к коллекции "Map"
 // Словарь - (string, string), и все это не null и не undefined
 // * покройте класс тестами
-class Dictionary {}
+class Dictionary {
+    constructor() {
+        // Инициализируем Map для хранения слов
+        this.words = new Map();
+    }
+
+    // Метод для добавления слова и его определения
+    add(word, definition) {
+        // Проверяем, что слово и определение являются строками
+        if (typeof word !== 'string' || typeof definition !== 'string') {
+            throw new Error('Word and definition must be strings');
+        }
+        // Добавляем слово и его определение в словарь
+        this.words.set(word, definition);
+    }
+
+    // Метод для получения определения слова
+    getDefinition(word) {
+        // Возвращаем определение слова
+        return this.words.get(word);
+    }
+
+    // Метод для проверки, существует ли слово в словаре
+    hasWord(word) {
+        // Возвращаем true, если слово существует в словаре
+        return this.words.has(word);
+    }
+}
+
 
 module.exports = {
     fioToName,
